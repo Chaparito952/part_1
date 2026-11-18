@@ -18,6 +18,13 @@ class Genre(models.Model):
     from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
 
 class Book(models.Model):
+    def display_genre(self):
+        """
+        Creates a string for the Genre. This is required to display genre in Admin.
+        """
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
     """
     Model representing a book (but not a specific copy of a book).
     """
