@@ -1,4 +1,12 @@
-/.venv/
-../.idea/
+# IDE
+.idea/
+.vscode/
 
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
 
+# Виртуальное окружение
+.venv/
+venv/
