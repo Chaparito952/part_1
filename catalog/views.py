@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
+from django.views import generic
+
 
 def index(request):
     num_books = Book.objects.all().count()
@@ -20,4 +22,12 @@ def index(request):
         'num_books_with_word': num_books_with_word,
     }
 
-    return render(request, 'catalog/index.html', context=context)  # проверьте путь!
+    return render(request, 'catalog/index.html', context=context)
+
+
+class BookListView(generic.ListView):
+    model = Book
+    paginate_by = 10
+
+class BookDetailView(generic.DetailView):
+    model = Book
