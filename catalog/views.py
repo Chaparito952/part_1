@@ -8,8 +8,10 @@ def index(request):
     num_instances = BookInstance.objects.all().count()
     num_instances_available = BookInstance.objects.filter(status__exact='a').count()
     num_authors = Author.objects.count()
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
 
-    # Новые переменные
+
     num_genres_with_word = Genre.objects.filter(name__icontains='фантастика').count()
     num_books_with_word = Book.objects.filter(title__icontains='война').count()
 
@@ -20,6 +22,8 @@ def index(request):
         'num_authors': num_authors,
         'num_genres_with_word': num_genres_with_word,
         'num_books_with_word': num_books_with_word,
+        'num_visits': num_visits
+
     }
 
     return render(request, 'catalog/index.html', context=context)
@@ -31,3 +35,10 @@ class BookListView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
     model = Book
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = 10  # Можно указать столько же, сколько у книг, для постраничного вывода
+
+class AuthorDetailView(generic.DetailView):
+    model = Author

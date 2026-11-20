@@ -14,4 +14,9 @@
     <li><strong>Жанров со словом «фантастика»:</strong> {{ num_genres_with_word }}</li>
     <li><strong>Книг со словом «война»:</strong> {{ num_books_with_word }}</li>
   </ul>
+
+  <p>
+    You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{%
+    else %} times{% endif %}.
+  </p>
 {% endblock %}
