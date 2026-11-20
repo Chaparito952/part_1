@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Django settings for locallibrary project.
 
@@ -9,6 +10,8 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
+=======
+>>>>>>> 6edd5a0addf783aa87e93e2e3039e7f83076b377
 import os
 from pathlib import Path
 
