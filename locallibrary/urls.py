@@ -1,31 +1,29 @@
 from django.contrib import admin
 from django.urls import path
-
+from django.urls import include
+import os
+from django.contrib.auth import views as auth_views
+from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# Используйте include() чтобы добавлять URL из каталога приложения
-from django.urls import include
-from django.urls import path
 urlpatterns += [
      path('catalog/', include('catalog.urls')),
+    path('accounts/logout/', auth_views.LogoutView.as_view(template_name='registration/logged_out.html'), name='logout'),
 ]
 
-# Добавьте URL соотношения, чтобы перенаправить запросы с корневого URL, на URL приложения
+
 from django.views.generic import RedirectView
 urlpatterns += [
     path('', RedirectView.as_view(url='/catalog/', permanent=True)),
 ]
 
-# Используйте static() чтобы добавить соотношения для статических файлов
-# Только на период разработки
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-#Add Django site authentication urls (for login, logout, password management)
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]

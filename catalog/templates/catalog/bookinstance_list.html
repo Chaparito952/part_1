@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <h1>All Book Copies</h1>
+  {% if bookinstance_list %}
+    <ul>
+      {% for inst in bookinstance_list %}
+        <li class="{% if inst.is_overdue %}text-danger{% endif %}">
+          <a href="{% url 'book-detail' inst.book.pk %}">{{ inst.book.title }}</a> 
+          ({{ inst.get_status_display }}) - Due: {{ inst.due_back|default:"Not set" }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no book copies in the library.</p>
+  {% endif %}
+{% endblock %}
