@@ -54,6 +54,9 @@ class BookInstance(models.Model):
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def get_absolute_url(self):
+        return reverse('book-detail', args=[str(self.id)])
+
     class Meta:
         permissions = (("can_mark_returned", "Set book as returned"),)
 
